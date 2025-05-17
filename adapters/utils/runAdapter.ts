@@ -143,9 +143,8 @@ export default async function runAdapter(volumeAdapter: BaseAdapter, cleanCurren
     const getLogs = async ({ target, targets, onlyArgs = true, fromBlock, toBlock, flatten = true, eventAbi, topics, topic, cacheInCloud = false, skipCacheRead = false, entireLog = false, skipIndexer, noTarget, ...rest }: FetchGetLogsOptions) => {
       fromBlock = fromBlock ?? await getFromBlock()
       toBlock = toBlock ?? await getToBlock()
-      if (noTarget) skipIndexer = true // temp hack, indexer has performance issues when no target is provided
 
-      return getEventLogs({ ...rest, fromBlock, toBlock, chain, target, targets, onlyArgs, flatten, eventAbi, topics, topic, cacheInCloud, skipCacheRead, entireLog, skipIndexer, })
+      return getEventLogs({ ...rest, fromBlock, toBlock, chain, target, targets, onlyArgs, flatten, eventAbi, topics, topic, cacheInCloud, skipCacheRead, entireLog, skipIndexer, noTarget })
     }
 
     // we intentionally add a delay to avoid fetching the same block before it is cached
